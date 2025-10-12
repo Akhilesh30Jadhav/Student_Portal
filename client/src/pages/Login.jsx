@@ -64,7 +64,7 @@ export default function Login() {
             fontSize: '24px',
             fontWeight: '800'
           }}>
-            SP
+            NX
           </div>
           <h2 style={{
             fontSize: '2rem',
