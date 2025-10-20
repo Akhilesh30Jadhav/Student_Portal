@@ -10,8 +10,8 @@ import Admin from './pages/Admin.jsx';
 import ProtectedRoute from './components/ProtectedRoute.jsx';
 import About from './pages/About.jsx';
 import Contact from './pages/Contact.jsx';
-import Preview from './pages/preview.jsx';
-import MaterialFiles from "./pages/MaterialFiles.jsx";
+/* import Preview from './pages/preview.jsx';
+ */import MaterialFiles from "./pages/MaterialFiles.jsx";
 
 import ResourcesLite from "./pages/ResourcesLite.jsx"; 
 
@@ -827,8 +827,8 @@ export default function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/materials" element={<Materials />} />
-            <Route path="/preview/:filename"   element={<Preview  />} />
-            <Route path="/resources" element={<ResourcesLite />} />
+{/*             <Route path="/preview/:filename"   element={<Preview  />} />
+ */}            <Route path="/resources" element={<ResourcesLite />} />
 
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />

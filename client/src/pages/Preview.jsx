@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 
+export default function Preview() {
+  return null; // or return <div style={{padding:20}}>Preview removed</div>;
+}
 
 export default function Preview() {
   const { filename } = useParams();
