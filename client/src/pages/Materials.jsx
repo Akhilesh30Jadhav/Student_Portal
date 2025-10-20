@@ -1,6 +1,10 @@
 import { useState, useEffect } from 'react';
 import api from '../utils/api.js';
 
+import FileList from "../components/FileList"; // adjust path if you're inside pages/
+import { registerMaterials } from "../utils/materialsStore";
+import { Link } from "react-router-dom";  
+
 export default function Materials() {
   const [materials, setMaterials] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -218,7 +222,8 @@ export default function Materials() {
           fileType: 'PDF',
           uploadedBy: { name: '----' },
           createdAt: new Date().toISOString(),
-          downloadCount: 0
+          downloadCount: 0,
+          file : '/materials/DAA-FULL.pdf'
         },
         {
           _id: '21',
@@ -230,8 +235,20 @@ export default function Materials() {
           fileType: 'PDF',
           uploadedBy: { name: '----' },
           createdAt: new Date().toISOString(),
-          downloadCount: 0
+          downloadCount: 0,
+          file: '/materials/QB.pdf',
+           
+          files: [
+    { title: 'week3_qb.pdf', path: '/materials/week3_qb.pdf' },
+    { title: 'syllabus_dbms.pdf', path: '/materials/syllabus_dbms.pdf' },
+    
+                  ]
+                  
+          
         },
+
+
+
         {
           _id: '22',
           title: 'Skill Based Lab - JAVA',
@@ -242,8 +259,11 @@ export default function Materials() {
           fileType: 'PDF',
           uploadedBy: { name: '----' },
           createdAt: new Date().toISOString(),
-          downloadCount: 0
+          downloadCount: 0,
+          file: '/materials/OOP-MANUAL.pdf'
         },
+
+        
         {
           _id: '23',
           title: 'Embedded Systems',
@@ -254,7 +274,9 @@ export default function Materials() {
           fileType: 'PDF',
           uploadedBy: { name: '----' },
           createdAt: new Date().toISOString(),
-          downloadCount: 0
+          downloadCount: 0,
+          file : '/materials/ES_Module 4.pdf'
+
         },
         {
           _id: '24',
@@ -294,6 +316,9 @@ export default function Materials() {
         },
         
       ]);
+
+      registerMaterials(materials);     
+
     } catch (error) {
       console.error('Error fetching materials:', error);
     } finally {
@@ -909,28 +934,116 @@ function MaterialCard({ material, isMobile }) {
           {new Date(material.createdAt).toLocaleDateString()}
         </div>
         
-        <button style={{
-          padding: '0.5rem 1rem',
-          background: `linear-gradient(135deg, ${getBranchColor(material.branch)}, ${getBranchColor(material.branch)}dd)`,
-          color: 'white',
-          border: 'none',
-          borderRadius: '8px',
-          fontSize: '14px',
-          fontWeight: '600',
-          cursor: 'pointer',
-          transition: 'all 0.3s ease'
-        }}
-        onMouseOver={(e) => {
-          e.target.style.transform = 'translateY(-2px)';
-          e.target.style.boxShadow = `0 8px 20px ${getBranchColor(material.branch)}40`;
-        }}
-        onMouseOut={(e) => {
-          e.target.style.transform = 'translateY(0px)';
-          e.target.style.boxShadow = 'none';
-        }}>
-          Download
-        </button>
-      </div>
-    </div>
-  );
-}
+        
+                    {/* VIEW (opens PDF in a new tab) */}
+           {/*  <a
+              href={material.file}                
+              target="_blank"
+              rel="noreferrer"
+              style={{
+                padding: "10px 14px",
+                background: "#fff",
+                color: "#6d28d9",
+                border: "2px solid #e9d5ff",
+                borderRadius: "12px",
+                fontWeight: 700,
+                fontSize: 14,
+                textDecoration: "none",
+                boxShadow: "0 6px 18px rgba(109,40,217,0.18)",
+                marginRight: 8
+              }}
+            >
+              View
+            </a> */}
+
+            {/* DOWNLOAD (keep your existing one as is) */}
+            {/* <a
+              href={material.file}
+              download
+              style={{
+                padding: "10px 14px",
+                background: "linear-gradient(135deg, #7c3aed, #6d28d9)",
+                color: "#fff",
+                border: "none",
+                borderRadius: "12px",
+                fontWeight: 700,
+                fontSize: 14,
+                textDecoration: "none",
+                boxShadow: "0 8px 24px rgba(109,40,217,0.35)"
+              }}
+            >
+              Download
+            </a> */}
+    {Array.isArray(material.files) && material.files.length > 0 && (
+   <Link
+    to={`/materials/${material._id}/files`}
+    state={{ material }}
+    onClick={() => {
+      try {
+        sessionStorage.setItem("notex_last_material", JSON.stringify(material));
+      } catch {}
+    }}
+    style={{
+      display: "inline-block",
+      marginTop: 8,
+      padding: "6px 10px",
+      background: "#fff",
+      color: getBranchColor(material.branch),
+      border: `2px solid ${getBranchColor(material.branch)}`,
+      borderRadius: 8,
+      fontSize: 12,
+      fontWeight: 700,
+      textDecoration: "none"
+    }}
+  >
+    More files ({material.files.length})
+  </Link>
+)}
+
+                  
+              
+
+                  </div>
+                   {/* Collapsible extra files (put this OUTSIDE the actions row) */}
+      <FileList
+        files={material.files || []}
+        color={getBranchColor(material.branch)}
+      />
+
+
+                </div>
+               
+              );
+            }
+            
+
+
+const materialsData = [
+  {
+    subject: "DBMS",
+    materials: [
+      {
+       name: "My Handwritten Notes",
+       file: "/materials/QB.pdf",
+       type: "PDF",
+       size: "X.X MB" 
+       
+       },
+      // …other materials
+    ]
+  },
+  {
+    subject: "DAA",
+    materials: [
+      {
+       name: "My Handwritten Notes",
+       file: "/materials/DAA-FULL.pdf",
+       type: "PDF",
+       size: "X.X MB" 
+       
+       },
+      // …other materials
+    ]
+  },
+  // …other subjects
+];

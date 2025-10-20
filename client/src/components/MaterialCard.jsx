@@ -18,3 +18,14 @@ export default function MaterialCard({ m, onDownload }) {
     </div>
   );
 }
+function MaterialCard({ material }) {
+  const navigate = useNavigate();
+  
+  const handlePreview = () => {
+    const filename = material.file.split('/').pop(); // Extract filename like "QB.pdf"
+    navigate(`/preview/${filename}`); // Navigate to /preview/QB.pdf
+  };
+
+  // ... rest of component
+}
+
