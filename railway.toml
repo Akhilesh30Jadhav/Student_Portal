@@ -3,7 +3,7 @@
 [build]
 # Treat the `server` folder as the project root
 root = "server"
-builder = "railpack"
+builder = "nixpacks"
 
 [deploy]
 # Use your server/package.json start script
