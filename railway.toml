@@ -1,0 +1,10 @@
+# railway.toml
+
+[build]
+# Treat the `server` folder as the project root
+root = "server"
+builder = "railpack"
+
+[deploy]
+# Use your server/package.json start script
+startCommand = "npm run start"
