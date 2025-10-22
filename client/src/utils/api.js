@@ -1,4 +1,7 @@
-const API_BASE_URL = 'http://localhost:5000/api';
+// src/utils/api.js
+const API_BASE_URL = import.meta.env.VITE_API_URL
+  ? `${import.meta.env.VITE_API_URL}/api`
+  : 'http://localhost:5000/api';
 
 class ApiClient {
   constructor() {
@@ -6,7 +9,7 @@ class ApiClient {
   }
 
   async request(endpoint, options = {}) {
-    const url = `${API_BASE_URL}${endpoint}`;
+    const url = `${API_BASE_URL}${endpoint.startsWith('/') ? endpoint : `/${endpoint}`}`;
     const config = {
       headers: {
         'Content-Type': 'application/json',
@@ -19,19 +22,14 @@ class ApiClient {
       config.headers.Authorization = `Bearer ${this.token}`;
     }
 
-    try {
-      const response = await fetch(url, config);
-      const data = await response.json();
+    const response = await fetch(url, config);
+    const data = await response.json();
 
-      if (!response.ok) {
-        throw new Error(data.message || 'Something went wrong');
-      }
-
-      return data;
-    } catch (error) {
-      console.error('API Error:', error);
-      throw error;
+    if (!response.ok) {
+      throw new Error(data.message || 'Something went wrong');
     }
+
+    return data;
   }
 
   async login(email, password) {
@@ -39,13 +37,13 @@ class ApiClient {
       method: 'POST',
       body: JSON.stringify({ email, password }),
     });
-    
+
     if (response.token) {
       localStorage.setItem('token', response.token);
       localStorage.setItem('user', JSON.stringify(response.user));
       this.token = response.token;
     }
-    
+
     return response;
   }
 
@@ -54,13 +52,13 @@ class ApiClient {
       method: 'POST',
       body: JSON.stringify(userData),
     });
-    
+
     if (response.token) {
       localStorage.setItem('token', response.token);
       localStorage.setItem('user', JSON.stringify(response.user));
       this.token = response.token;
     }
-    
+
     return response;
   }
 
@@ -76,6 +74,7 @@ class ApiClient {
   }
 
   async uploadMaterial(formData) {
+    // Remove default JSON header for form data upload
     return this.request('/materials', {
       method: 'POST',
       body: formData,
