@@ -8,29 +8,47 @@ class ApiClient {
     this.token = localStorage.getItem('token');
   }
 
-  async request(endpoint, options = {}) {
-    const url = `${API_BASE_URL}${endpoint.startsWith('/') ? endpoint : `/${endpoint}`}`;
-    const config = {
-      headers: {
-        'Content-Type': 'application/json',
-        ...options.headers,
-      },
-      ...options,
-    };
 
-    if (this.token) {
-      config.headers.Authorization = `Bearer ${this.token}`;
+async request(endpoint, options = {}) {
+  const url = `${API_BASE_URL}${endpoint.startsWith('/') ? endpoint : `/${endpoint}`}`;
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+      ...options.headers,
+    },
+    ...options,
+  };
+
+  if (this.token) {
+    config.headers.Authorization = `Bearer ${this.token}`;
+  }
+
+  try {
+    const response = await fetch(url, config);
+    
+    // Don't try to parse empty responses
+    let data = null;
+    if (response.headers.get('content-length') !== '0' && response.status !== 204) {
+      try {
+        data = await response.json();
+      } catch (e) {
+        console.error('Failed to parse JSON:', e);
+        throw new Error('Invalid response from server');
+      }
     }
 
-    const response = await fetch(url, config);
-    const data = await response.json();
-
     if (!response.ok) {
-      throw new Error(data.message || 'Something went wrong');
+      throw new Error(data?.message || `Server error: ${response.status}`);
     }
 
     return data;
+  } catch (error) {
+    console.error('API request failed:', error);
+    throw error;
   }
+}
+
+
 
   async login(email, password) {
     const response = await this.request('/auth/login', {
