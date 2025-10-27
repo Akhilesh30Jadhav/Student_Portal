@@ -10,7 +10,7 @@ export default function Navbar() {
 
   const handleLogout = () => {
     logout();
-    navigate('/');
+    navigate('/login');
   };
 
   return (
@@ -46,13 +46,14 @@ export default function Navbar() {
                     Admin
                   </Link>
                 )}
+                {/* User Info visibly at all times after login */}
                 <div className="flex items-center space-x-2">
                   <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
                     <span className="text-white text-sm font-medium">
-                      {user.name?.charAt(0).toUpperCase()}
+                      {user.name ? user.name.charAt(0).toUpperCase() : "U"}
                     </span>
                   </div>
-                  <span className="text-gray-700 font-medium">{user.name}</span>
+                  <span className="text-gray-700 font-medium">{user.name ?? user.email}</span>
                 </div>
                 <button onClick={handleLogout} className="btn btn-secondary">
                   Logout
@@ -109,6 +110,15 @@ export default function Navbar() {
                     Admin
                   </Link>
                 )}
+                {/* User Info in mobile menu */}
+                <div className="flex items-center space-x-2 px-4 py-2">
+                  <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
+                    <span className="text-white text-sm font-medium">
+                      {user.name ? user.name.charAt(0).toUpperCase() : "U"}
+                    </span>
+                  </div>
+                  <span className="text-gray-700 font-medium">{user.name ?? user.email}</span>
+                </div>
                 <button onClick={handleLogout} className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-blue-50 rounded-lg">
                   Logout
                 </button>
