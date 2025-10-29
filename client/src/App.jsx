@@ -11,6 +11,7 @@ import ProtectedRoute from './components/ProtectedRoute.jsx';
 import About from './pages/About.jsx';
 import Contact from './pages/Contact.jsx';
 import MaterialFiles from "./pages/MaterialFiles.jsx";
+import Home from './pages/Home.jsx';
 
 import ResourcesLite from "./pages/ResourcesLite.jsx"; 
 
@@ -302,340 +303,340 @@ function MobileNavLink({ href, text, onClick }) {
 }
 
 // MOBILE-RESPONSIVE HOME PAGE
-function Home() {
-  const [isMobile, setIsMobile] = useState(false);
+// function Home() {
+//   const [isMobile, setIsMobile] = useState(false);
 
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-    window.addEventListener('resize', handleResize);
-    handleResize();
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+//   useEffect(() => {
+//     const handleResize = () => {
+//       setIsMobile(window.innerWidth < 768);
+//     };
+//     window.addEventListener('resize', handleResize);
+//     handleResize();
+//     return () => window.removeEventListener('resize', handleResize);
+//   }, []);
 
-  return (
-    <div>
-      {/* MOBILE-RESPONSIVE Hero Section */}
-      <section style={{ 
-        padding: isMobile ? '4rem 1rem' : '8rem 2rem', 
-        textAlign: 'center', 
-        position: 'relative', 
-        overflow: 'hidden',
-        background: 'linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f1f5f9 100%)'
-      }}>
-        {/* Floating Elements - Hidden on mobile for performance */}
-        {!isMobile && (
-          <>
-            <FloatingElement top="15%" left="8%" size="100px" color="rgba(15, 23, 42, 0.08)" delay="0s" />
-            <FloatingElement top="25%" right="12%" size="150px" color="rgba(30, 41, 59, 0.06)" delay="2s" />
-            <FloatingElement bottom="30%" left="15%" size="80px" color="rgba(51, 65, 85, 0.08)" delay="4s" />
-            <FloatingElement top="40%" right="25%" size="120px" color="rgba(15, 23, 42, 0.05)" delay="1s" />
-          </>
-        )}
+//   return (
+//     <div>
+//       {/* MOBILE-RESPONSIVE Hero Section */}
+//       <section style={{ 
+//         padding: isMobile ? '4rem 1rem' : '8rem 2rem', 
+//         textAlign: 'center', 
+//         position: 'relative', 
+//         overflow: 'hidden',
+//         background: 'linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f1f5f9 100%)'
+//       }}>
+//         {/* Floating Elements - Hidden on mobile for performance */}
+//         {!isMobile && (
+//           <>
+//             <FloatingElement top="15%" left="8%" size="100px" color="rgba(15, 23, 42, 0.08)" delay="0s" />
+//             <FloatingElement top="25%" right="12%" size="150px" color="rgba(30, 41, 59, 0.06)" delay="2s" />
+//             <FloatingElement bottom="30%" left="15%" size="80px" color="rgba(51, 65, 85, 0.08)" delay="4s" />
+//             <FloatingElement top="40%" right="25%" size="120px" color="rgba(15, 23, 42, 0.05)" delay="1s" />
+//           </>
+//         )}
         
-        <div style={{ 
-          animation: 'fadeInUp 1.2s ease-out', 
-          position: 'relative', 
-          zIndex: 10,
-          maxWidth: '1000px',
-          margin: '0 auto'
-        }}>
-          <div style={{
-            display: 'inline-block',
-            padding: isMobile ? '0.5rem 1rem' : '0.75rem 1.5rem',
-            background: 'rgba(15, 23, 42, 0.05)',
-            borderRadius: '50px',
-            marginBottom: isMobile ? '1.5rem' : '2rem',
-            border: '1px solid rgba(15, 23, 42, 0.1)'
-          }}>
-            <span style={{ 
-              color: '#1e293b', 
-              fontWeight: '600', 
-              fontSize: isMobile ? '12px' : '14px',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '0.5rem'
-            }}>
-              <span>🎓</span>
-              Created Specially for R.A.I.T Students
-            </span>
-          </div>
+//         <div style={{ 
+//           animation: 'fadeInUp 1.2s ease-out', 
+//           position: 'relative', 
+//           zIndex: 10,
+//           maxWidth: '1000px',
+//           margin: '0 auto'
+//         }}>
+//           <div style={{
+//             display: 'inline-block',
+//             padding: isMobile ? '0.5rem 1rem' : '0.75rem 1.5rem',
+//             background: 'rgba(15, 23, 42, 0.05)',
+//             borderRadius: '50px',
+//             marginBottom: isMobile ? '1.5rem' : '2rem',
+//             border: '1px solid rgba(15, 23, 42, 0.1)'
+//           }}>
+//             <span style={{ 
+//               color: '#1e293b', 
+//               fontWeight: '600', 
+//               fontSize: isMobile ? '12px' : '14px',
+//               display: 'flex',
+//               alignItems: 'center',
+//               gap: '0.5rem'
+//             }}>
+//               <span>🎓</span>
+//               Created Specially for R.A.I.T Students
+//             </span>
+//           </div>
           
-          <h1 style={{
-            fontSize: isMobile ? '2.5rem' : '5.5rem',
-            fontWeight: '900',
-            marginBottom: isMobile ? '1.5rem' : '2rem',
-            background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #475569 100%)',
-            WebkitBackgroundClip: 'text',
-            backgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            lineHeight: '1.1',
-            letterSpacing: isMobile ? '-1px' : '-2px'
-          }}>
-            Your Academic
-            <br />
-            <span style={{
-              background: 'linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #ec4899 100%)',
-              WebkitBackgroundClip: 'text',
-              backgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-            }}>
-              Success Hub
-            </span>
-          </h1>
+//           <h1 style={{
+//             fontSize: isMobile ? '2.5rem' : '5.5rem',
+//             fontWeight: '900',
+//             marginBottom: isMobile ? '1.5rem' : '2rem',
+//             background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #475569 100%)',
+//             WebkitBackgroundClip: 'text',
+//             backgroundClip: 'text',
+//             WebkitTextFillColor: 'transparent',
+//             lineHeight: '1.1',
+//             letterSpacing: isMobile ? '-1px' : '-2px'
+//           }}>
+//             Your Academic
+//             <br />
+//             <span style={{
+//               background: 'linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #ec4899 100%)',
+//               WebkitBackgroundClip: 'text',
+//               backgroundClip: 'text',
+//               WebkitTextFillColor: 'transparent',
+//             }}>
+//               Success Hub
+//             </span>
+//           </h1>
           
-          <p style={{ 
-            fontSize: isMobile ? '1.1rem' : '1.4rem', 
-            color: '#64748b', 
-            marginBottom: isMobile ? '2rem' : '3rem', 
-            maxWidth: isMobile ? '100%' : '700px', 
-            margin: `0 auto ${isMobile ? '2rem' : '3rem'}`,
-            lineHeight: '1.7',
-            fontWeight: '400',
-            padding: isMobile ? '0 1rem' : '0'
-          }}>
-            Transform your learning experience with our intelligent platform. Downlaod resources,high quality notes and accelerate your academic journey.
-          </p>
+//           <p style={{ 
+//             fontSize: isMobile ? '1.1rem' : '1.4rem', 
+//             color: '#64748b', 
+//             marginBottom: isMobile ? '2rem' : '3rem', 
+//             maxWidth: isMobile ? '100%' : '700px', 
+//             margin: `0 auto ${isMobile ? '2rem' : '3rem'}`,
+//             lineHeight: '1.7',
+//             fontWeight: '400',
+//             padding: isMobile ? '0 1rem' : '0'
+//           }}>
+//             Transform your learning experience with our intelligent platform. Downlaod resources,high quality notes and accelerate your academic journey.
+//           </p>
           
-          <div style={{ 
-            display: 'flex', 
-            gap: isMobile ? '1rem' : '1.5rem', 
-            justifyContent: 'center', 
-            flexWrap: 'wrap', 
-            marginBottom: isMobile ? '3rem' : '4rem',
-            flexDirection: isMobile ? 'column' : 'row',
-            alignItems: 'center'
-          }}>
-            <PrimaryButton text="Start Learning Free" icon="🚀" isMobile={isMobile} />
+//           <div style={{ 
+//             display: 'flex', 
+//             gap: isMobile ? '1rem' : '1.5rem', 
+//             justifyContent: 'center', 
+//             flexWrap: 'wrap', 
+//             marginBottom: isMobile ? '3rem' : '4rem',
+//             flexDirection: isMobile ? 'column' : 'row',
+//             alignItems: 'center'
+//           }}>
+//             <PrimaryButton text="Start Learning Free" icon="🚀" isMobile={isMobile} />
             
-          </div>
+//           </div>
 
-          {/* Stats - Mobile Responsive Grid */}
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: isMobile ? 'repeat(2, 1fr)' : 'repeat(auto-fit, minmax(200px, 1fr))',
-            gap: isMobile ? '1rem' : '2rem',
-            maxWidth: '800px',
-            margin: '0 auto'
-          }}>
-            <StatCard number="Deploying Soon" label="Study Materials" isMobile={isMobile} />
-            <StatCard number="____" label="Active Students" isMobile={isMobile} />
-            <StatCard number="____" label="Success Rate" isMobile={isMobile} />
+//           {/* Stats - Mobile Responsive Grid */}
+//           <div style={{
+//             display: 'grid',
+//             gridTemplateColumns: isMobile ? 'repeat(2, 1fr)' : 'repeat(auto-fit, minmax(200px, 1fr))',
+//             gap: isMobile ? '1rem' : '2rem',
+//             maxWidth: '800px',
+//             margin: '0 auto'
+//           }}>
+//             <StatCard number="Deploying Soon" label="Study Materials" isMobile={isMobile} />
+//             <StatCard number="____" label="Active Students" isMobile={isMobile} />
+//             <StatCard number="____" label="Success Rate" isMobile={isMobile} />
             
-          </div>
-        </div>
-      </section>
+//           </div>
+//         </div>
+//       </section>
 
-      {/* MOBILE-RESPONSIVE Features Section */}
-      <section style={{ 
-        padding: isMobile ? '4rem 1rem' : '8rem 2rem', 
-        background: 'linear-gradient(135deg, #ffffff 0%, #f8fafc 100%)'
-      }}>
-        <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: isMobile ? '3rem' : '5rem' }}>
-            <div style={{
-              display: 'inline-block',
-              padding: '0.5rem 1.25rem',
-              background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1))',
-              borderRadius: '50px',
-              marginBottom: '1.5rem',
-              border: '1px solid rgba(59, 130, 246, 0.2)'
-            }}>
-              <span style={{ color: '#3b82f6', fontWeight: '600', fontSize: '14px' }}>✨ FEATURES</span>
-            </div>
+//       {/* MOBILE-RESPONSIVE Features Section */}
+//       <section style={{ 
+//         padding: isMobile ? '4rem 1rem' : '8rem 2rem', 
+//         background: 'linear-gradient(135deg, #ffffff 0%, #f8fafc 100%)'
+//       }}>
+//         <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
+//           <div style={{ textAlign: 'center', marginBottom: isMobile ? '3rem' : '5rem' }}>
+//             <div style={{
+//               display: 'inline-block',
+//               padding: '0.5rem 1.25rem',
+//               background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1))',
+//               borderRadius: '50px',
+//               marginBottom: '1.5rem',
+//               border: '1px solid rgba(59, 130, 246, 0.2)'
+//             }}>
+//               <span style={{ color: '#3b82f6', fontWeight: '600', fontSize: '14px' }}>✨ FEATURES</span>
+//             </div>
             
-            <h2 style={{
-              fontSize: isMobile ? '2rem' : '3.5rem',
-              fontWeight: '800',
-              marginBottom: '1.5rem',
-              background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 100%)',
-              WebkitBackgroundClip: 'text',
-              backgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              letterSpacing: '-1px'
-            }}>
-              Everything You Need
-              <br />
-              <span style={{
-                background: 'linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%)',
-                WebkitBackgroundClip: 'text',
-                backgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-              }}>
-                To Excel
-              </span>
-            </h2>
-            <p style={{ 
-              fontSize: isMobile ? '1rem' : '1.2rem', 
-              color: '#64748b', 
-              maxWidth: '600px', 
-              margin: '0 auto',
-              padding: isMobile ? '0 1rem' : '0'
-            }}>
-              Powerful tools designed to enhance your learning experience and boost your academic performance.
-            </p>
-          </div>
+//             <h2 style={{
+//               fontSize: isMobile ? '2rem' : '3.5rem',
+//               fontWeight: '800',
+//               marginBottom: '1.5rem',
+//               background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 100%)',
+//               WebkitBackgroundClip: 'text',
+//               backgroundClip: 'text',
+//               WebkitTextFillColor: 'transparent',
+//               letterSpacing: '-1px'
+//             }}>
+//               Everything You Need
+//               <br />
+//               <span style={{
+//                 background: 'linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%)',
+//                 WebkitBackgroundClip: 'text',
+//                 backgroundClip: 'text',
+//                 WebkitTextFillColor: 'transparent',
+//               }}>
+//                 To Excel
+//               </span>
+//             </h2>
+//             <p style={{ 
+//               fontSize: isMobile ? '1rem' : '1.2rem', 
+//               color: '#64748b', 
+//               maxWidth: '600px', 
+//               margin: '0 auto',
+//               padding: isMobile ? '0 1rem' : '0'
+//             }}>
+//               Powerful tools designed to enhance your learning experience and boost your academic performance.
+//             </p>
+//           </div>
 
-          <div style={{ 
-            display: 'grid', 
-            gridTemplateColumns: isMobile ? '1fr' : 'repeat(auto-fit, minmax(380px, 1fr))', 
-            gap: isMobile ? '1.5rem' : '2.5rem' 
-          }}>
-            <PremiumFeatureCard 
-              icon="🎯"
-              title="Quality Resources at Your Fingertips"
-              description="Sorted pdfs, notes, and study materials curated by top students and educators."
-              gradient="linear-gradient(135deg, #3b82f6, #1d4ed8)"
-              features={[""]}
-              isMobile={isMobile}
-            />
-            <PremiumFeatureCard 
-              icon="🔍"
-              title="Advanced Search Engine"
-              description="Find exactly what you need with our intelligent search that understands context and academic relevance."
-              gradient="linear-gradient(135deg, #8b5cf6, #7c3aed)"
-              features={["Semantic search", "Filter by subject", "Instant results"]}
-              isMobile={isMobile}
-            />
+//           <div style={{ 
+//             display: 'grid', 
+//             gridTemplateColumns: isMobile ? '1fr' : 'repeat(auto-fit, minmax(380px, 1fr))', 
+//             gap: isMobile ? '1.5rem' : '2.5rem' 
+//           }}>
+//             <PremiumFeatureCard 
+//               icon="🎯"
+//               title="Quality Resources at Your Fingertips"
+//               description="Sorted pdfs, notes, and study materials curated by top students and educators."
+//               gradient="linear-gradient(135deg, #3b82f6, #1d4ed8)"
+//               features={[""]}
+//               isMobile={isMobile}
+//             />
+//             <PremiumFeatureCard 
+//               icon="🔍"
+//               title="Advanced Search Engine"
+//               description="Find exactly what you need with our intelligent search that understands context and academic relevance."
+//               gradient="linear-gradient(135deg, #8b5cf6, #7c3aed)"
+//               features={["Semantic search", "Filter by subject", "Instant results"]}
+//               isMobile={isMobile}
+//             />
            
           
-            <PremiumFeatureCard 
-              icon="🛡️"
-              title="Secure & Private"
-              description="Your data is protected . Focus on learning, we'll handle the rest."
-              gradient="linear-gradient(135deg, #ef4444, #dc2626)"
-              features={["End-to-end encryption", "Privacy controls", "Secure backup"]}
-              isMobile={isMobile}
-            />
+//             <PremiumFeatureCard 
+//               icon="🛡️"
+//               title="Secure & Private"
+//               description="Your data is protected . Focus on learning, we'll handle the rest."
+//               gradient="linear-gradient(135deg, #ef4444, #dc2626)"
+//               features={["End-to-end encryption", "Privacy controls", "Secure backup"]}
+//               isMobile={isMobile}
+//             />
             
-          </div>
-        </div>
-      </section>
+//           </div>
+//         </div>
+//       </section>
 
-      {/* MOBILE-RESPONSIVE CTA Section */}
-      <section style={{ 
-        padding: isMobile ? '4rem 1rem' : '8rem 2rem', 
-        position: 'relative', 
-        overflow: 'hidden' 
-      }}>
-        <div style={{
-          position: 'absolute',
-          inset: 0,
-          background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%)'
-        }}></div>
+//       {/* MOBILE-RESPONSIVE CTA Section */}
+//       <section style={{ 
+//         padding: isMobile ? '4rem 1rem' : '8rem 2rem', 
+//         position: 'relative', 
+//         overflow: 'hidden' 
+//       }}>
+//         <div style={{
+//           position: 'absolute',
+//           inset: 0,
+//           background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%)'
+//         }}></div>
         
-        <div style={{ maxWidth: '1000px', margin: '0 auto', position: 'relative', zIndex: 10 }}>
-          <div style={{
-            background: 'rgba(255, 255, 255, 0.1)',
-            backdropFilter: 'blur(20px)',
-            border: '1px solid rgba(255, 255, 255, 0.2)',
-            padding: isMobile ? '3rem 2rem' : '4rem 3rem',
-            borderRadius: '24px',
-            textAlign: 'center',
-            boxShadow: '0 25px 50px rgba(0, 0, 0, 0.2)'
-          }}>
-            <h2 style={{ 
-              fontSize: isMobile ? '2rem' : '3rem', 
-              fontWeight: '800', 
-              marginBottom: '1.5rem',
-              color: 'white',
-              letterSpacing: '-1px'
-            }}>
-              Ready to Transform Your Learning?
-            </h2>
-            <p style={{ 
-              fontSize: isMobile ? '1rem' : '1.25rem', 
-              marginBottom: '3rem', 
-              color: 'rgba(255, 255, 255, 0.8)',
-              maxWidth: '600px',
-              margin: '0 auto 3rem'
-            }}>
-              Join and contribute in our website to maken this platform better for everyone. Let's achieve academic excellence together!
-            </p>
+//         <div style={{ maxWidth: '1000px', margin: '0 auto', position: 'relative', zIndex: 10 }}>
+//           <div style={{
+//             background: 'rgba(255, 255, 255, 0.1)',
+//             backdropFilter: 'blur(20px)',
+//             border: '1px solid rgba(255, 255, 255, 0.2)',
+//             padding: isMobile ? '3rem 2rem' : '4rem 3rem',
+//             borderRadius: '24px',
+//             textAlign: 'center',
+//             boxShadow: '0 25px 50px rgba(0, 0, 0, 0.2)'
+//           }}>
+//             <h2 style={{ 
+//               fontSize: isMobile ? '2rem' : '3rem', 
+//               fontWeight: '800', 
+//               marginBottom: '1.5rem',
+//               color: 'white',
+//               letterSpacing: '-1px'
+//             }}>
+//               Ready to Transform Your Learning?
+//             </h2>
+//             <p style={{ 
+//               fontSize: isMobile ? '1rem' : '1.25rem', 
+//               marginBottom: '3rem', 
+//               color: 'rgba(255, 255, 255, 0.8)',
+//               maxWidth: '600px',
+//               margin: '0 auto 3rem'
+//             }}>
+//               Join and contribute in our website to maken this platform better for everyone. Let's achieve academic excellence together!
+//             </p>
             
-            <div style={{ 
-              display: 'flex', 
-              gap: isMobile ? '1rem' : '1.5rem', 
-              justifyContent: 'center', 
-              flexWrap: 'wrap',
-              flexDirection: isMobile ? 'column' : 'row',
-              alignItems: 'center'
-            }}>
-              <button style={{
-                padding: isMobile ? '1rem 2rem' : '1.25rem 3rem',
-                background: 'linear-gradient(135deg, #3b82f6, #1d4ed8)',
-                color: 'white',
-                border: 'none',
-                borderRadius: '16px',
-                fontWeight: '700',
-                fontSize: isMobile ? '16px' : '18px',
-                cursor: 'pointer',
-                transition: 'all 0.3s ease',
-                boxShadow: '0 12px 30px rgba(59, 130, 246, 0.4)',
-                width: isMobile ? '100%' : 'auto'
-              }}
-              onMouseOver={(e) => {
-                if (!isMobile) {
-                  e.target.style.transform = 'translateY(-4px) scale(1.02)';
-                  e.target.style.boxShadow = '0 20px 40px rgba(59, 130, 246, 0.6)';
-                }
-              }}
-              onMouseOut={(e) => {
-                if (!isMobile) {
-                  e.target.style.transform = 'translateY(0px) scale(1)';
-                  e.target.style.boxShadow = '0 12px 30px rgba(59, 130, 246, 0.4)';
-                }
-              }}
-              onClick={() => window.location.href = '/register'}>
-                Start 
-                <span style={{ marginLeft: '12px', fontSize: '20px' }}>✨</span>
-              </button>
+//             <div style={{ 
+//               display: 'flex', 
+//               gap: isMobile ? '1rem' : '1.5rem', 
+//               justifyContent: 'center', 
+//               flexWrap: 'wrap',
+//               flexDirection: isMobile ? 'column' : 'row',
+//               alignItems: 'center'
+//             }}>
+//               <button style={{
+//                 padding: isMobile ? '1rem 2rem' : '1.25rem 3rem',
+//                 background: 'linear-gradient(135deg, #3b82f6, #1d4ed8)',
+//                 color: 'white',
+//                 border: 'none',
+//                 borderRadius: '16px',
+//                 fontWeight: '700',
+//                 fontSize: isMobile ? '16px' : '18px',
+//                 cursor: 'pointer',
+//                 transition: 'all 0.3s ease',
+//                 boxShadow: '0 12px 30px rgba(59, 130, 246, 0.4)',
+//                 width: isMobile ? '100%' : 'auto'
+//               }}
+//               onMouseOver={(e) => {
+//                 if (!isMobile) {
+//                   e.target.style.transform = 'translateY(-4px) scale(1.02)';
+//                   e.target.style.boxShadow = '0 20px 40px rgba(59, 130, 246, 0.6)';
+//                 }
+//               }}
+//               onMouseOut={(e) => {
+//                 if (!isMobile) {
+//                   e.target.style.transform = 'translateY(0px) scale(1)';
+//                   e.target.style.boxShadow = '0 12px 30px rgba(59, 130, 246, 0.4)';
+//                 }
+//               }}
+//               onClick={() => window.location.href = '/register'}>
+//                 Start 
+//                 <span style={{ marginLeft: '12px', fontSize: '20px' }}>✨</span>
+//               </button>
               
               
-            </div>
+//             </div>
             
-            <div style={{ 
-              marginTop: '3rem', 
-              display: 'flex', 
-              justifyContent: 'center', 
-              alignItems: 'center', 
-              gap: isMobile ? '1rem' : '2rem',
-              flexWrap: 'wrap',
-              flexDirection: isMobile ? 'column' : 'row'
-            }}>
-              <div style={{ color: 'rgba(255, 255, 255, 0.7)', fontSize: '14px', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                <span></span> 
-              </div>
-              <div style={{ color: 'rgba(255, 255, 255, 0.7)', fontSize: '14px', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                <span></span> 
-              </div>
-              <div style={{ color: 'rgba(255, 255, 255, 0.7)', fontSize: '14px', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                <span></span> 
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
-  );
-}
+//             <div style={{ 
+//               marginTop: '3rem', 
+//               display: 'flex', 
+//               justifyContent: 'center', 
+//               alignItems: 'center', 
+//               gap: isMobile ? '1rem' : '2rem',
+//               flexWrap: 'wrap',
+//               flexDirection: isMobile ? 'column' : 'row'
+//             }}>
+//               <div style={{ color: 'rgba(255, 255, 255, 0.7)', fontSize: '14px', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+//                 <span></span> 
+//               </div>
+//               <div style={{ color: 'rgba(255, 255, 255, 0.7)', fontSize: '14px', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+//                 <span></span> 
+//               </div>
+//               <div style={{ color: 'rgba(255, 255, 255, 0.7)', fontSize: '14px', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+//                 <span></span> 
+//               </div>
+//             </div>
+//           </div>
+//         </div>
+//       </section>
+//     </div>
+//   );
+// }
 
-// Component Definitions
-function FloatingElement({ top, bottom, left, right, size, color, delay }) {
-  return (
-    <div style={{ 
-      position: 'absolute', 
-      top, bottom, left, right,
-      width: size, 
-      height: size, 
-      background: color, 
-      borderRadius: '50%', 
-      animation: `float 8s ease-in-out infinite`,
-      animationDelay: delay
-    }}></div>
-  );
-}
+// // Component Definitions
+// function FloatingElement({ top, bottom, left, right, size, color, delay }) {
+//   return (
+//     <div style={{ 
+//       position: 'absolute', 
+//       top, bottom, left, right,
+//       width: size, 
+//       height: size, 
+//       background: color, 
+//       borderRadius: '50%', 
+//       animation: `float 8s ease-in-out infinite`,
+//       animationDelay: delay
+//     }}></div>
+//   );
+// }
 
 function PrimaryButton({ text, icon, isMobile }) {
   return (

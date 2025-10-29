@@ -1,7 +1,9 @@
+// src/pages/Contact.jsx
 import { useState, useEffect } from 'react';
 
 export default function Contact() {
   const [isMobile, setIsMobile] = useState(false);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -12,12 +14,17 @@ export default function Contact() {
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    const handleMouseMove = (e) => setMousePosition({ x: e.clientX, y: e.clientY });
+    
     window.addEventListener('resize', handleResize);
+    window.addEventListener('mousemove', handleMouseMove);
     handleResize();
-    return () => window.removeEventListener('resize', handleResize);
+    
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('mousemove', handleMouseMove);
+    };
   }, []);
 
   const handleChange = (e) => {
@@ -31,7 +38,6 @@ export default function Contact() {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate form submission
     setTimeout(() => {
       setIsSubmitting(false);
       setIsSubmitted(true);
@@ -40,210 +46,186 @@ export default function Contact() {
   };
 
   return (
-    <div style={{
-      minHeight: '100vh',
-      background: 'linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f1f5f9 100%)'
-    }}>
+    <div style={{ minHeight: '100vh', background: '#0a0a0a', overflow: 'hidden', position: 'relative' }}>
+      {/* Floating Orbs Background */}
+      {!isMobile && (
+        <>
+          <div style={{
+            position: 'absolute',
+            width: '400px',
+            height: '400px',
+            background: 'radial-gradient(circle, rgba(167, 139, 250, 0.15), transparent 70%)',
+            borderRadius: '50%',
+            filter: 'blur(80px)',
+            top: '5%',
+            left: '5%',
+            transform: `translate(${mousePosition.x * 0.01}px, ${mousePosition.y * 0.01}px)`,
+            transition: 'transform 0.3s ease-out',
+            animation: 'float 20s ease-in-out infinite'
+          }} />
+          <div style={{
+            position: 'absolute',
+            width: '350px',
+            height: '350px',
+            background: 'radial-gradient(circle, rgba(249, 168, 212, 0.15), transparent 70%)',
+            borderRadius: '50%',
+            filter: 'blur(80px)',
+            top: '35%',
+            right: '10%',
+            transform: `translate(${mousePosition.x * -0.015}px, ${mousePosition.y * -0.015}px)`,
+            transition: 'transform 0.3s ease-out',
+            animation: 'float 25s ease-in-out infinite reverse'
+          }} />
+        </>
+      )}
+
       {/* Hero Section */}
       <section style={{
         padding: isMobile ? '4rem 1rem' : '6rem 2rem',
-        textAlign: 'center'
+        textAlign: 'center',
+        position: 'relative',
+        zIndex: 10
       }}>
-        <div style={{ maxWidth: '800px', margin: '0 auto' }}>
+        <div style={{ maxWidth: '900px', margin: '0 auto' }}>
           <div style={{
             display: 'inline-block',
             padding: '0.5rem 1.25rem',
-            background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1))',
+            background: 'rgba(167, 139, 250, 0.1)',
             borderRadius: '50px',
             marginBottom: '2rem',
-            border: '1px solid rgba(59, 130, 246, 0.2)'
+            border: '1px solid rgba(167, 139, 250, 0.2)',
+            animation: 'fadeInDown 0.8s ease-out'
           }}>
-            <span style={{ color: '#3b82f6', fontWeight: '600', fontSize: '14px' }}>💬 CONTACT US</span>
+            <span style={{ 
+              color: '#a78bfa', 
+              fontWeight: 700, 
+              fontSize: '14px',
+              letterSpacing: '0.05em'
+            }}>
+              💬 CONTACT US
+            </span>
           </div>
 
           <h1 style={{
-            fontSize: isMobile ? '2.5rem' : '4rem',
-            fontWeight: '800',
-            marginBottom: '2rem',
-            background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 100%)',
+            fontSize: isMobile ? '2.5rem' : '4.5rem',
+            fontWeight: 900,
+            marginBottom: '1.5rem',
+            background: 'linear-gradient(180deg, #ffffff 0%, rgba(255, 255, 255, 0.7) 100%)',
             WebkitBackgroundClip: 'text',
-            backgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
-            letterSpacing: '-1px'
+            letterSpacing: '-0.02em',
+            lineHeight: 1.1,
+            animation: 'fadeInUp 1s ease-out'
           }}>
             Get In Touch
             <br />
             <span style={{
-              background: 'linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%)',
+              background: 'linear-gradient(90deg, #a78bfa, #f9a8d4)',
               WebkitBackgroundClip: 'text',
-              backgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
+              WebkitTextFillColor: 'transparent'
             }}>
               With Us
             </span>
           </h1>
 
           <p style={{
-            fontSize: isMobile ? '1.1rem' : '1.3rem',
-            color: '#64748b',
-            maxWidth: '600px',
+            fontSize: isMobile ? '1.063rem' : '1.25rem',
+            color: 'rgba(255, 255, 255, 0.7)',
+            maxWidth: '700px',
             margin: '0 auto',
-            lineHeight: '1.7'
+            lineHeight: 1.7,
+            animation: 'fadeInUp 1.2s ease-out'
           }}>
-            Have questions, suggestions, or need support? We'd love to hear from you. Our team is here to help you succeed in your academic journey.
+            Have questions, suggestions, or need support? We'd love to hear from you. Our team is here to help 
+            you succeed in your academic journey.
           </p>
         </div>
       </section>
 
       {/* Main Content */}
-      <section style={{ padding: isMobile ? '2rem 1rem' : '3rem 2rem' }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+      <section style={{ 
+        padding: isMobile ? '2rem 1rem' : '3rem 2rem',
+        position: 'relative',
+        zIndex: 10
+      }}>
+        <div style={{ maxWidth: '1300px', margin: '0 auto' }}>
           <div style={{
             display: 'grid',
-            gridTemplateColumns: isMobile ? '1fr' : '2fr 1fr',
-            gap: '4rem',
+            gridTemplateColumns: isMobile ? '1fr' : '2fr 1.2fr',
+            gap: '3rem',
             alignItems: 'start'
           }}>
-            {/* Contact Form */}
+            {/* Contact Form - Glass Card */}
             <div style={{
-              background: 'white',
+              background: 'rgba(255, 255, 255, 0.03)',
+              backdropFilter: 'blur(20px)',
               borderRadius: '24px',
-              padding: isMobile ? '2rem' : '3rem',
-              boxShadow: '0 25px 50px rgba(15, 23, 42, 0.1)',
-              border: '1px solid rgba(15, 23, 42, 0.05)'
+              padding: isMobile ? '2rem 1.5rem' : '3rem',
+              border: '1px solid rgba(255, 255, 255, 0.08)',
+              boxShadow: '0 30px 60px rgba(0, 0, 0, 0.3)',
+              animation: 'fadeInUp 1.4s ease-out'
             }}>
               <h2 style={{
                 fontSize: '2rem',
-                fontWeight: '700',
-                color: '#1f2937',
-                marginBottom: '0.5rem'
+                fontWeight: 900,
+                background: 'linear-gradient(180deg, #ffffff 0%, rgba(255, 255, 255, 0.8) 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                marginBottom: '0.75rem',
+                letterSpacing: '-0.01em'
               }}>
                 Send us a message
               </h2>
               <p style={{
-                color: '#64748b',
-                marginBottom: '2rem'
+                color: 'rgba(255, 255, 255, 0.6)',
+                marginBottom: '2.5rem',
+                fontSize: '15px'
               }}>
-                Fill out the form below and we'll get back to you as soon as possible.
+                Fill out the form below and we'll get back to you within 24 hours.
               </p>
 
               {isSubmitted ? (
-                <div style={{
-                  textAlign: 'center',
-                  padding: '3rem 0'
-                }}>
-                  <div style={{
-                    fontSize: '4rem',
-                    marginBottom: '1rem'
-                  }}>✅</div>
-                  <h3 style={{
-                    fontSize: '1.5rem',
-                    fontWeight: '600',
-                    color: '#10b981',
-                    marginBottom: '1rem'
-                  }}>
-                    Message Sent!
-                  </h3>
-                  <p style={{ color: '#64748b' }}>
-                    Thank you for reaching out. We'll get back to you within 24 hours.
-                  </p>
-                  <button
-                    onClick={() => setIsSubmitted(false)}
-                    style={{
-                      marginTop: '1.5rem',
-                      padding: '0.75rem 1.5rem',
-                      background: 'transparent',
-                      color: '#3b82f6',
-                      border: '2px solid #3b82f6',
-                      borderRadius: '8px',
-                      fontWeight: '600',
-                      cursor: 'pointer',
-                      transition: 'all 0.3s ease'
-                    }}
-                  >
-                    Send Another Message
-                  </button>
-                </div>
+                <SuccessMessage onReset={() => setIsSubmitted(false)} isMobile={isMobile} />
               ) : (
                 <form onSubmit={handleSubmit}>
+                  {/* Name & Email Row */}
                   <div style={{
                     display: 'grid',
                     gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr',
                     gap: '1.5rem',
                     marginBottom: '1.5rem'
                   }}>
-                    <div>
-                      <label style={{
-                        display: 'block',
-                        marginBottom: '0.5rem',
-                        color: '#374151',
-                        fontWeight: '600',
-                        fontSize: '14px'
-                      }}>
-                        Full Name *
-                      </label>
-                      <input
-                        type="text"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleChange}
-                        required
-                        style={{
-                          width: '100%',
-                          padding: '0.75rem 1rem',
-                          border: '2px solid #e5e7eb',
-                          borderRadius: '12px',
-                          fontSize: '16px',
-                          transition: 'all 0.3s ease',
-                          outline: 'none'
-                        }}
-                        onFocus={(e) => e.target.style.borderColor = '#3b82f6'}
-                        onBlur={(e) => e.target.style.borderColor = '#e5e7eb'}
-                        placeholder="----"
-                      />
-                    </div>
-
-                    <div>
-                      <label style={{
-                        display: 'block',
-                        marginBottom: '0.5rem',
-                        color: '#374151',
-                        fontWeight: '600',
-                        fontSize: '14px'
-                      }}>
-                        Email Address *
-                      </label>
-                      <input
-                        type="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        required
-                        style={{
-                          width: '100%',
-                          padding: '0.75rem 1rem',
-                          border: '2px solid #e5e7eb',
-                          borderRadius: '12px',
-                          fontSize: '16px',
-                          transition: 'all 0.3s ease',
-                          outline: 'none'
-                        }}
-                        onFocus={(e) => e.target.style.borderColor = '#3b82f6'}
-                        onBlur={(e) => e.target.style.borderColor = '#e5e7eb'}
-                        placeholder="----"
-                      />
-                    </div>
+                    <FormInput
+                      label="Full Name"
+                      name="name"
+                      type="text"
+                      value={formData.name}
+                      onChange={handleChange}
+                      placeholder="Your name"
+                      required
+                    />
+                    <FormInput
+                      label="Email Address"
+                      name="email"
+                      type="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      placeholder="your@email.com"
+                      required
+                    />
                   </div>
 
+                  {/* Subject */}
                   <div style={{ marginBottom: '1.5rem' }}>
                     <label style={{
                       display: 'block',
-                      marginBottom: '0.5rem',
-                      color: '#374151',
-                      fontWeight: '600',
-                      fontSize: '14px'
+                      marginBottom: '0.75rem',
+                      color: 'rgba(255, 255, 255, 0.9)',
+                      fontWeight: 700,
+                      fontSize: '14px',
+                      letterSpacing: '0.05em'
                     }}>
-                      Subject *
+                      SUBJECT *
                     </label>
                     <select
                       name="subject"
@@ -252,12 +234,26 @@ export default function Contact() {
                       required
                       style={{
                         width: '100%',
-                        padding: '0.75rem 1rem',
-                        border: '2px solid #e5e7eb',
+                        padding: '0.875rem 1.25rem',
+                        background: 'rgba(255, 255, 255, 0.05)',
+                        border: '1px solid rgba(255, 255, 255, 0.1)',
                         borderRadius: '12px',
                         fontSize: '16px',
-                        backgroundColor: 'white',
-                        outline: 'none'
+                        color: 'white',
+                        outline: 'none',
+                        cursor: 'pointer',
+                        transition: 'all 0.3s ease',
+                        backdropFilter: 'blur(10px)'
+                      }}
+                      onFocus={(e) => {
+                        e.target.style.background = 'rgba(255, 255, 255, 0.08)';
+                        e.target.style.borderColor = '#a78bfa';
+                        e.target.style.boxShadow = '0 0 0 3px rgba(167, 139, 250, 0.1)';
+                      }}
+                      onBlur={(e) => {
+                        e.target.style.background = 'rgba(255, 255, 255, 0.05)';
+                        e.target.style.borderColor = 'rgba(255, 255, 255, 0.1)';
+                        e.target.style.boxShadow = 'none';
                       }}
                     >
                       <option value="">Select a subject</option>
@@ -270,15 +266,17 @@ export default function Contact() {
                     </select>
                   </div>
 
+                  {/* Message */}
                   <div style={{ marginBottom: '2rem' }}>
                     <label style={{
                       display: 'block',
-                      marginBottom: '0.5rem',
-                      color: '#374151',
-                      fontWeight: '600',
-                      fontSize: '14px'
+                      marginBottom: '0.75rem',
+                      color: 'rgba(255, 255, 255, 0.9)',
+                      fontWeight: 700,
+                      fontSize: '14px',
+                      letterSpacing: '0.05em'
                     }}>
-                      Message *
+                      MESSAGE *
                     </label>
                     <textarea
                       name="message"
@@ -288,115 +286,374 @@ export default function Contact() {
                       rows="6"
                       style={{
                         width: '100%',
-                        padding: '0.75rem 1rem',
-                        border: '2px solid #e5e7eb',
+                        padding: '0.875rem 1.25rem',
+                        background: 'rgba(255, 255, 255, 0.05)',
+                        border: '1px solid rgba(255, 255, 255, 0.1)',
                         borderRadius: '12px',
                         fontSize: '16px',
-                        transition: 'all 0.3s ease',
+                        color: 'white',
                         outline: 'none',
-                        resize: 'vertical'
+                        resize: 'vertical',
+                        transition: 'all 0.3s ease',
+                        backdropFilter: 'blur(10px)',
+                        fontFamily: 'inherit'
                       }}
-                      onFocus={(e) => e.target.style.borderColor = '#3b82f6'}
-                      onBlur={(e) => e.target.style.borderColor = '#e5e7eb'}
-                      placeholder="------"
+                      onFocus={(e) => {
+                        e.target.style.background = 'rgba(255, 255, 255, 0.08)';
+                        e.target.style.borderColor = '#a78bfa';
+                        e.target.style.boxShadow = '0 0 0 3px rgba(167, 139, 250, 0.1)';
+                      }}
+                      onBlur={(e) => {
+                        e.target.style.background = 'rgba(255, 255, 255, 0.05)';
+                        e.target.style.borderColor = 'rgba(255, 255, 255, 0.1)';
+                        e.target.style.boxShadow = 'none';
+                      }}
+                      placeholder="Your message here..."
                     />
                   </div>
 
+                  {/* Submit Button */}
                   <button
                     type="submit"
                     disabled={isSubmitting}
                     style={{
                       width: '100%',
-                      padding: '1rem',
-                      background: isSubmitting 
-                        ? '#9ca3af' 
-                        : 'linear-gradient(135deg, #0f172a 0%, #1e293b 100%)',
+                      padding: '1rem 1.5rem',
+                      background: isSubmitting
+                        ? 'linear-gradient(135deg, #6b7280, #4b5563)'
+                        : 'linear-gradient(135deg, #a78bfa, #f9a8d4)',
                       color: 'white',
                       border: 'none',
                       borderRadius: '12px',
                       fontSize: '16px',
-                      fontWeight: '600',
+                      fontWeight: 700,
                       cursor: isSubmitting ? 'not-allowed' : 'pointer',
-                      transition: 'all 0.3s ease'
+                      transition: 'all 0.4s ease',
+                      boxShadow: isSubmitting 
+                        ? '0 4px 15px rgba(0, 0, 0, 0.2)'
+                        : '0 10px 30px rgba(167, 139, 250, 0.4)'
+                    }}
+                    onMouseEnter={(e) => {
+                      if (!isSubmitting) {
+                        e.target.style.transform = 'translateY(-4px) scale(1.02)';
+                        e.target.style.boxShadow = '0 15px 40px rgba(167, 139, 250, 0.6)';
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      e.target.style.transform = 'translateY(0) scale(1)';
+                      e.target.style.boxShadow = isSubmitting 
+                        ? '0 4px 15px rgba(0, 0, 0, 0.2)'
+                        : '0 10px 30px rgba(167, 139, 250, 0.4)';
                     }}
                   >
-                    {isSubmitting ? 'Sending Message...' : 'Send Message'}
+                    {isSubmitting ? (
+                      <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}>
+                        <span style={{ animation: 'spin 1s linear infinite' }}>⏳</span>
+                        Sending...
+                      </span>
+                    ) : (
+                      <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.75rem' }}>
+                        <span>📨</span>
+                        Send Message
+                      </span>
+                    )}
                   </button>
                 </form>
               )}
             </div>
 
-            {/* Contact Info */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+            {/* Contact Info Cards */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
               <ContactCard
                 icon="📧"
                 title="Email Us"
-                description="Get in touch via email for detailed inquiries"
-                  info="akhilesh30jadhav@gmail.com"
+                description="Get in touch via email"
+                info="akhilesh30jadhav@gmail.com"
+                gradient="linear-gradient(135deg, #a78bfa, #8b5cf6)"
                 isMobile={isMobile}
               />
               
+              <ContactCard
+                icon="💬"
+                title="Quick Response"
+                description="We typically respond within"
+                info="24 Hours"
+                gradient="linear-gradient(135deg, #f9a8d4, #ec4899)"
+                isMobile={isMobile}
+              />
               
-              
-              
+              <ContactCard
+                icon="🚀"
+                title="Based At"
+                description="D Y Patil University"
+                info="Pune, India"
+                gradient="linear-gradient(135deg, #fbbf24, #f59e0b)"
+                isMobile={isMobile}
+              />
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Info Banner */}
+      <section style={{
+        padding: isMobile ? '2rem 1rem' : '3rem 2rem',
+        position: 'relative',
+        zIndex: 10
+      }}>
+        <div style={{
+          maxWidth: '1300px',
+          margin: '0 auto',
+          background: 'rgba(167, 139, 250, 0.08)',
+          backdropFilter: 'blur(20px)',
+          border: '1px solid rgba(167, 139, 250, 0.2)',
+          borderRadius: '20px',
+          padding: isMobile ? '2rem 1.5rem' : '3rem',
+          textAlign: 'center'
+        }}>
+          <h3 style={{
+            fontSize: isMobile ? '1.5rem' : '2rem',
+            fontWeight: 800,
+            background: 'linear-gradient(90deg, #a78bfa, #f9a8d4)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            marginBottom: '1rem'
+          }}>
+            Have a Quick Question?
+          </h3>
+          <p style={{
+            color: 'rgba(255, 255, 255, 0.8)',
+            fontSize: '1.063rem',
+            lineHeight: 1.7,
+            maxWidth: '600px',
+            margin: '0 auto'
+          }}>
+            Check out our materials library or browse frequently asked questions. Your answer might be just a click away!
+          </p>
         </div>
       </section>
     </div>
   );
 }
 
-function ContactCard({ icon, title, description, info, isMobile }) {
+// Form Input Component
+function FormInput({ label, name, type, value, onChange, placeholder, required }) {
+  return (
+    <div>
+      <label style={{
+        display: 'block',
+        marginBottom: '0.75rem',
+        color: 'rgba(255, 255, 255, 0.9)',
+        fontWeight: 700,
+        fontSize: '14px',
+        letterSpacing: '0.05em'
+      }}>
+        {label}
+        {required && ' *'}
+      </label>
+      <input
+        type={type}
+        name={name}
+        value={value}
+        onChange={onChange}
+        required={required}
+        placeholder={placeholder}
+        style={{
+          width: '100%',
+          padding: '0.875rem 1.25rem',
+          background: 'rgba(255, 255, 255, 0.05)',
+          border: '1px solid rgba(255, 255, 255, 0.1)',
+          borderRadius: '12px',
+          fontSize: '16px',
+          color: 'white',
+          outline: 'none',
+          transition: 'all 0.3s ease',
+          backdropFilter: 'blur(10px)'
+        }}
+        onFocus={(e) => {
+          e.target.style.background = 'rgba(255, 255, 255, 0.08)';
+          e.target.style.borderColor = '#a78bfa';
+          e.target.style.boxShadow = '0 0 0 3px rgba(167, 139, 250, 0.1)';
+        }}
+        onBlur={(e) => {
+          e.target.style.background = 'rgba(255, 255, 255, 0.05)';
+          e.target.style.borderColor = 'rgba(255, 255, 255, 0.1)';
+          e.target.style.boxShadow = 'none';
+        }}
+      />
+    </div>
+  );
+}
+
+// Success Message Component
+function SuccessMessage({ onReset, isMobile }) {
   return (
     <div style={{
-      background: 'white',
-      borderRadius: '20px',
-      padding: '2rem',
-      boxShadow: '0 10px 30px rgba(15, 23, 42, 0.1)',
-      border: '1px solid rgba(15, 23, 42, 0.05)',
-      transition: 'all 0.3s ease'
-    }}
-    onMouseOver={(e) => {
-      if (!isMobile) {
-        e.currentTarget.style.transform = 'translateY(-4px)';
-        e.currentTarget.style.boxShadow = '0 20px 50px rgba(15, 23, 42, 0.2)';
-      }
-    }}
-    onMouseOut={(e) => {
-      if (!isMobile) {
-        e.currentTarget.style.transform = 'translateY(0px)';
-        e.currentTarget.style.boxShadow = '0 10px 30px rgba(15, 23, 42, 0.1)';
-      }
+      textAlign: 'center',
+      padding: '3rem 0',
+      animation: 'fadeInUp 0.6s ease-out'
     }}>
       <div style={{
-        fontSize: '2rem',
+        fontSize: '4rem',
+        marginBottom: '1.5rem',
+        animation: 'bounce 0.8s ease infinite'
+      }}>
+        ✅
+      </div>
+      <h3 style={{
+        fontSize: '1.75rem',
+        fontWeight: 800,
+        background: 'linear-gradient(90deg, #10b981, #059669)',
+        WebkitBackgroundClip: 'text',
+        WebkitTextFillColor: 'transparent',
         marginBottom: '1rem'
+      }}>
+        Message Sent Successfully!
+      </h3>
+      <p style={{ 
+        color: 'rgba(255, 255, 255, 0.7)',
+        marginBottom: '2rem',
+        lineHeight: 1.7
+      }}>
+        Thank you for reaching out. We'll review your message and get back to you within 24 hours.
+      </p>
+      <button
+        onClick={onReset}
+        style={{
+          padding: '0.875rem 1.75rem',
+          background: 'linear-gradient(135deg, #a78bfa, #f9a8d4)',
+          color: 'white',
+          border: 'none',
+          borderRadius: '12px',
+          fontWeight: 700,
+          cursor: 'pointer',
+          fontSize: '15px',
+          transition: 'all 0.3s ease',
+          boxShadow: '0 8px 20px rgba(167, 139, 250, 0.4)'
+        }}
+        onMouseEnter={(e) => {
+          e.target.style.transform = 'translateY(-3px) scale(1.02)';
+          e.target.style.boxShadow = '0 12px 30px rgba(167, 139, 250, 0.6)';
+        }}
+        onMouseLeave={(e) => {
+          e.target.style.transform = 'translateY(0) scale(1)';
+          e.target.style.boxShadow = '0 8px 20px rgba(167, 139, 250, 0.4)';
+        }}
+      >
+        Send Another Message
+      </button>
+    </div>
+  );
+}
+
+// Contact Card Component
+function ContactCard({ icon, title, description, info, gradient, isMobile }) {
+  const [isHovered, setIsHovered] = useState(false);
+
+  return (
+    <div
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      style={{
+        background: 'rgba(255, 255, 255, 0.03)',
+        backdropFilter: 'blur(20px)',
+        borderRadius: '16px',
+        padding: '2rem',
+        border: '1px solid rgba(255, 255, 255, 0.08)',
+        transition: 'all 0.4s ease',
+        transform: isHovered && !isMobile ? 'translateY(-8px)' : 'translateY(0)',
+        boxShadow: isHovered 
+          ? '0 30px 60px rgba(0, 0, 0, 0.3)'
+          : '0 10px 30px rgba(0, 0, 0, 0.2)',
+        cursor: 'pointer'
+      }}
+    >
+      <div style={{
+        width: '60px',
+        height: '60px',
+        background: gradient,
+        borderRadius: '14px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        fontSize: '1.75rem',
+        marginBottom: '1.5rem',
+        boxShadow: `0 10px 25px ${gradient}40`
       }}>
         {icon}
       </div>
       <h3 style={{
         fontSize: '1.25rem',
-        fontWeight: '600',
-        color: '#1f2937',
+        fontWeight: 800,
+        color: 'white',
         marginBottom: '0.5rem'
       }}>
         {title}
       </h3>
       <p style={{
-        color: '#64748b',
-        fontSize: '14px',
+        color: 'rgba(255, 255, 255, 0.6)',
+        fontSize: '13px',
         marginBottom: '1rem'
       }}>
         {description}
       </p>
       <div style={{
-        color: '#3b82f6',
-        fontWeight: '600',
-        fontSize: '14px'
+        background: gradient,
+        WebkitBackgroundClip: 'text',
+        WebkitTextFillColor: 'transparent',
+        fontWeight: 700,
+        fontSize: '15px'
       }}>
         {info}
       </div>
     </div>
   );
 }
+
+// Add CSS animation styles
+const style = document.createElement('style');
+style.textContent = `
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+  
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+  
+  @keyframes float {
+    0%, 100% { transform: translateY(0) translateX(0); }
+    33% { transform: translateY(-30px) translateX(20px); }
+    66% { transform: translateY(-10px) translateX(-20px); }
+  }
+  
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes fadeInDown {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Select styling */
+  select option {
+    background: #1a1a1a;
+    color: white;
+  }
+`;
+document.head.appendChild(style);
